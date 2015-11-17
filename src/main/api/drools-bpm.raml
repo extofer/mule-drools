@@ -1,0 +1,49 @@
+#%RAML 0.8
+title: drools-bpm
+version: 0.1
+
+/customer:
+  description: This API will accept a customer before it is evaluated by a business rule
+  post:
+    body:
+      application/json:
+        schema: |
+          {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "id": "/",
+            "type": "object",
+            "properties": {
+              "customer": {
+                "id": "customer",
+                "type": "string"
+              },
+              "condition": {
+                "id": "condition",
+                "type": "string"
+              }
+            },
+            "required": [
+              "customer",
+              "condition"
+            ]
+          }
+        example: |
+              {
+                "customer": "Customer Name",
+                "condition": "false"
+              }
+    responses:
+      200:
+          body:
+            application/json:
+              example: |
+                {
+                  "customer": "1234"
+                }
+      500:
+        body:
+          application/json:
+            example: |
+              {
+                "errorMessage": "The Customer was not created!"
+              }
